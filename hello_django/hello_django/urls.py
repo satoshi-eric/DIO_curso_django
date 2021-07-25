@@ -1,0 +1,28 @@
+"""hello_django URL Configuration
+
+The `urlpatterns` list routes URLs to views. For more information please see:
+    https://docs.djangoproject.com/en/3.2/topics/http/urls/
+Examples:
+Function views
+    1. Add an import:  from my_app import views
+    2. Add a URL to urlpatterns:  path('', views.home, name='home')
+Class-based views
+    1. Add an import:  from other_app.views import Home
+    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
+Including another URLconf
+    1. Import the include() function: from django.urls import include, path
+    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
+"""
+from django.contrib import admin
+from django.urls import path
+from core import views
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('hello/<nome>/<int:idade>/', views.hello),
+    # Para passar parâmetros pela url, é necessário que o nome do parâmetro na url e na função sejam iguais
+    path('soma/<int:num1>/<int:num2>/', views.soma),
+    path('subtracao/<int:num1>/<int:num2>', views.subtracao),
+    path('multiplicacao/<int:num1>/<int:num2>', views.multiplicacao),
+    path('divisao/<int:num1>/<int:num2>', views.divisao)
+]
