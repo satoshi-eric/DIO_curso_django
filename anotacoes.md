@@ -139,7 +139,7 @@ O django-admin fica no ambiente virtual.
 * Entre as tabelas padrão, estão Usuário, Grupo e Perfil
 * Com as tabelas padrões, é possível criar usuários e definir perfis de qual usuário pode acessar determinado conteúdo
 
-### Criando as tabelas
+### Começando projeto
 
 Para criar as atbelas, usamos o comando
 ```
@@ -153,3 +153,13 @@ python manage.py createsuperuser --username admin
 
 email: admin@agenda.com.br
 password: admin123
+
+## Criando tabaelas com models
+
+### Migração de dados no Django
+
+* Para migração de dados no django, é necessário que hajam classes criadas
+* Com essas classes, é necessário usar o comando `migrate ` para a migração.
+* Também pode-se usar o comando migrations para a criação do arquivo de migração, para não migrar às cegas. 
+* Também pode-se usar o comando sqlmigrate para visualizar os comandos do banco de dados
+
