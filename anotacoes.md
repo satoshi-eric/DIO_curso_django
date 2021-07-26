@@ -163,3 +163,15 @@ password: admin123
 * Também pode-se usar o comando migrations para a criação do arquivo de migração, para não migrar às cegas. 
 * Também pode-se usar o comando sqlmigrate para visualizar os comandos do banco de dados
 
+### Criando tabelas
+
+Para criar uma tabela, é necessário criar uma model, uma classe que será representada dentro do aplicativo. Depois disso, usar o comando 
+```
+python .\manage.py makemigrations core
+```
+```
+python manage.py sqlmigrate core 0001 
+```
+```
+python .\manage.py migrate core 0001
+```
