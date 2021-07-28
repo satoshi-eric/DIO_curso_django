@@ -154,6 +154,8 @@ python manage.py createsuperuser --username admin
 email: admin@agenda.com.br
 password: admin123
 
+senhas de todos os outros usuários: Hello123!
+
 ## Criando tabaelas com models
 
 ### Migração de dados no Django
@@ -175,3 +177,10 @@ python manage.py sqlmigrate core 0001
 ```
 python .\manage.py migrate core 0001
 ```
+O `makemigrations` cria m arquivo de migração. O `sqlmigrate` mostra os comandos SQL que serão utilizados depois pelo `migrate` que atualiza as tabelas do banco de dados.
+
+## Criando página de listagem
+
+* O django oferece no seu modelo de templates a capacidade de utilizar comandos python dentro do HTML
+* Com isso, é possível usar comandos if e for
+
