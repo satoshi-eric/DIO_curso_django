@@ -56,7 +56,7 @@ django-admin startproject core
 
 Basta mover a pasta criada para o diretório raíz do projeto. Como criamos um novo app, precisamos entrar no arquivo settings.py e adicionar "core" à lista INSTALLED_APPS para o django interpretar o app como um app do projeto. 
 
-### Exrcício 
+### Exercício 
 
 No projeto criado, acrecentar uma rota que realize operações matemáticas entre 2 números.
 
@@ -84,7 +84,7 @@ O django-admin fica no ambiente virtual.
 * Plataforma padrão para aplicações web em python
 * Serve de interface do Servidor e a Aplicação Web
 * O startproject inicia uma configuração padrão do WSGI
-* Com o runserver, é iniciado um servidor de aplicação leve. Esse servidor é espesificado pela configuração WSGI_APPLICATION. Esse servidor é para desenvolvimento. Para produção, é necessário de um servidor mais robusto.
+* Com o runserver, é iniciado um servidor de aplicação leve. Esse servidor é espesificado pela configuração WSGI_APPLICATION. Esse servidor é para desenvolvimento. Para produção, é necessário de um servidor mais robusto.
   
 ### Settings
 
@@ -161,7 +161,7 @@ senhas de todos os outros usuários: Hello123!
 ### Migração de dados no Django
 
 * Para migração de dados no django, é necessário que hajam classes criadas
-* Com essas classes, é necessário usar o comando `migrate ` para a migração.
+* Com essas classes, é necessário usar o comando `migrate` para a migração.
 * Também pode-se usar o comando migrations para a criação do arquivo de migração, para não migrar às cegas. 
 * Também pode-se usar o comando sqlmigrate para visualizar os comandos do banco de dados
 
@@ -177,10 +177,60 @@ python manage.py sqlmigrate core 0001
 ```
 python .\manage.py migrate core 0001
 ```
-O `makemigrations` cria m arquivo de migração. O `sqlmigrate` mostra os comandos SQL que serão utilizados depois pelo `migrate` que atualiza as tabelas do banco de dados.
+O `makemigrations` cria um arquivo de migração. O `sqlmigrate` mostra os comandos SQL que serão utilizados depois pelo `migrate` que atualiza as tabelas do banco de dados.
 
 ## Criando página de listagem
 
 * O django oferece no seu modelo de templates a capacidade de utilizar comandos python dentro do HTML
 * Com isso, é possível usar comandos if e for
 
+Para isso, precisamos criar páginas HTML que irão mostrar os eventos para os usuários. Antes de criar essas paginas, precisamos criar um diretório chamado **templates** onde essas páginas estarão. 
+
+Agora, precisamos avisar ao django que esse diretório existe. Em settings, existe uma constante chamada `TEMPLATES` onde dentro dela há uma lista chamada `DIRS`   onde será colocado o diretório dos templates. Adicionamos o seguinte item à lista:
+
+```python
+os.path.join(BASE_DIR, 'templates)
+```
+
+Agora, o django reconhece o diretório templates e podemos criar as páginas HTML. 
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Agenda</title>
+  <h1>Agenda</h1>
+</head>
+<body>
+    <h1>Agendamentos</h1>
+    
+    <p>Desenvolvido por Eric</p>
+</body>
+</html>
+```
+
+Agora, precisamos configurar as views para renderizar essa página. No arquivo views.py, adicionamos a seguinte função:
+
+```python
+def lista_eventos(request):
+    evento = Evento.objects.all() 
+    dados = {'eventos': evento}
+    return render(request, 'agenda.html', dados)
+```
+
+Ela irá fazer a requisição ao banco de dados e irá mostrar a página para o usuário. Com o django, é possível enviar dados do back-end para o front-end usando o render como mostrado acima. Com isso, é possível renderizar os dados na página. Para isso, na página, usaremos uma sintaxe que permite acessar esses dados:
+
+```html
+  <ul style="font-size: 18px;">
+      {% for evento in eventos %}
+          <li>{{evento.titulo}} - {{evento.get_data_evento}}</li>
+      {% endfor %}
+  </ul>
+```
+
+Agora, os dados do servidor serão mostrados para o usuário.
+
+## Autenticação
+
+### 
