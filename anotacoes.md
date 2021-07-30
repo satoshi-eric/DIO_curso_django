@@ -233,4 +233,40 @@ Agora, os dados do servidor serão mostrados para o usuário.
 
 ## Autenticação
 
-### 
+### Pacote de autenticação do django
+
+* O django já possui um pacot de autnticação em `django.contrib.auth` 
+* Cria tabelas de usuários e permissões
+* É necessário que ele esteja no `INSTALLED_APPS` do  `settings.py`
+
+### authenticate
+
+* É a função responsável por autenticar usuário
+```python
+user = authenticate(username=username, password=password)
+```
+
+### login 
+* Responsável por criar uma sessão para o usuário autenticado
+```python
+login(requesst, user)
+```
+
+### logout
+* Apaga os dados da sessão do usuário
+```python
+user = logout(request)
+```
+
+### login_required
+* Responsável por validar a autenticação do usuário
+* É um decorador utilizado em todas as funções/views que necessitam de um usuário logado
+```python
+@login_required(login_url='/login/')
+def lista_eventos(request):
+```
+
+### Decoradores
+* São funções usadas sobre outras funções
+* São usados para adicionar funcionalidade às funções
+
