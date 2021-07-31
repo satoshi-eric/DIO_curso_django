@@ -23,5 +23,6 @@ class Evento(models.Model):
     def get_data_evento(self):
         return self.data_evento.strftime('%d/%m/%y %H:%M Hrs')
 
+    # Método para pegar a data no formato padrão para exibir na página de alteração de evento
     def get_data_input_evento(self):
         return self.data_evento.strftime('%Y-%m-%dT%H:%M')

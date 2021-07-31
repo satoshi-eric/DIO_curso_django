@@ -56,9 +56,10 @@ def evento(request):
         dados['evento'] = Evento.objects.get(id=id_evento)
     return render(request, 'evento.html', dados)
 
-# Tela com formulário para enviar dados de novo evento
+# Tela com formulário para enviar dados de novo evento ou atualizar evento já exeistente
 @login_required(login_url='/login/')
 def submit_evento(request):
+    # Verificando se a requisição veio de um formulário
     if request.POST:
         titulo = request.POST.get('titulo')
         data_evento = request.POST.get('data_evento')
@@ -67,6 +68,7 @@ def submit_evento(request):
         id_evento = request.POST.get('id_evento')
         if id_evento:
             # Evento.objects.filter(id=id_evento).update(titulo=titulo, data_evento=data_evento, descricao=descricao, usuario=usuario)
+            # Criando evento para verificar se o usuário que está editando é o mesmo da sessão para que não se possa editar dados de outras pessoas
             evento = Evento.objects.get(id=id_evento)
             if evento.usuario == usuario:
                 evento.titulo = titulo
@@ -78,11 +80,12 @@ def submit_evento(request):
         
     return redirect('/')
 
-
+# Função para deletar eventos pelo id. Recebe um parâmetro pela URl chamado id_evento para identifcar qual evento será excluído
 @login_required(login_url='/login/')
 def delete_evento(request, id_evento):
     usuario = request.user
     evento = Evento.objects.get(id=id_evento)
+    # Verifica se o usuário da sessão é o mesmo que está tentando deletar o evento
     if usuario == evento.usuario:
         evento.delete()
     return redirect('/')
