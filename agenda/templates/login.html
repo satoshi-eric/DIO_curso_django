@@ -9,6 +9,7 @@
 <body>
     <h1>Login</h1>
     <!-- É necessário utilizar o csrf_token para questões de segurança -->
+    <!-- O atributo action possui a função de concatenar a url -->
     <form action="submit" method="POST"> {% csrf_token %}
         <div align='center'>
             <label>Usuário: </label>
